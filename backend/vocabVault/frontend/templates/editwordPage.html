@@ -1,0 +1,35 @@
+{% extends "MasterTemplate.html" %}
+{% load static %}
+
+{% block cssfile %}
+<link rel="stylesheet" href="{% static 'css/editwordPagecss.css' %}"> 
+{% endblock %}
+
+
+{% block jsfile %}
+<script type="text/javascript" src="{% static 'js/editwordPagejs.js' %}" defer></script>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="edit-word-form">
+        <h2>Edit Word: {{ word.word }}</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_word">Word:</label>
+                <input type="text" id="id_word" name="word" value="{{ word.word }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="id_meaning">Meaning:</label>
+                <textarea id="id_meaning" name="meaning" rows="4" required>{{ word.meaning }}</textarea>
+            </div>
+            
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+{% endblock %}

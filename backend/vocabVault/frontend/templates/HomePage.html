@@ -1,0 +1,73 @@
+{% extends "MasterTemplate.html" %}
+{% load static %}
+
+{% block cssfile %}
+<link rel="stylesheet" href="{% static 'css/HomePageCss.css' %}"> 
+{% endblock %}
+
+
+{% block jsfile %}
+<script type="text/javascript" src="{% static 'js/HomePageJS.js' %}" defer></script>
+{% endblock %}
+
+
+{% block content %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<!-- Heading for the homepage -->
+<h1 style="color: blue; text-align: center; font-size: 3.5em;">Vocab Vault</h1>
+
+{% if user.is_authenticated %}
+<p style="color: black; font-size: 20px; text-align: center;">Welcome to your vocabulary vault, {{ user.username }}</p>
+{% else %}
+<p style="color: black; font-size: 20px; text-align: center;">You are not logged in. Please log in to access your vault.</p>
+{% endif %}
+
+{% if word_of_the_day %}
+    <h1 id="wordoftheday">{{ word_of_the_day.word }}</h1>
+    <!-- Content box to center and position the information -->
+    <div class="content">
+        <div id="explainbox"> <!-- Box for the important information -->
+            <h3> Pronunciation: </h3>
+            <div>{{ word_of_the_day.phonetic }}</div>
+            <h3> Part of speech: </h3>
+            <div>{{ word_of_the_day.function }}</div>
+            <h3> Meaning:</h3>
+            <div class="description">
+                <div class="definition">
+                    {{ word_of_the_day.meaning }}
+                </div>
+            </div>
+        </div>
+
+        <div class="right-container"> <!-- Container containing the date, favorites button, and rating -->
+            <div id="datebox">
+                <h3 id="Date">{{ today_formatted }}</h3>
+            </div>
+            <form action="{% url 'add_to_favorites' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="word" value="{{ word_of_the_day.word }}">
+                <input type="hidden" name="meaning" value="{{ word_of_the_day.meaning }}">
+                <button type="submit" class="button">Add to Favorites</button>
+            </form>
+            <div class="rating">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+    <p>No word of the day found for today.</p>
+{% endif %}
+
+{% endblock %}

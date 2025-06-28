@@ -1,0 +1,400 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* This changes the style of the navigation bar*/
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    border-radius: 8px;
+  }
+  
+  /* This changes the style of the normal buttons of the navigation bar */
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* This changes the style of the dropdown menus in the navigation bar*/
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  } 
+  
+  /* This changes the style of the dropdown menus in the navigation bar*/
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  /* This makes the buttons turn red when they are being hovered over */
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+  }
+  
+  /* This changes the style of the buttons in the dropdown menus*/
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* This changes the style of the text in the buttons of the dropdown menus*/
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  /* This turns the buttons in the dropdown menus grey when hovered over */
+  .dropdown-content a:hover {
+    background-color: #bebebe;
+  }
+
+  /* This makes dropdown menu content visible when hovered over */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  } 
+  
+  /* This changes the style of the search bar*/
+  .navbar input[type= text] {
+    float: left;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-left: 8px;
+    font-size: 17px;
+    width: 80px;
+    border-radius: 5px;
+  }
+
+  /* This makes the account button be at the right side of the navbar */
+  #accountButton {
+    float: right;
+  }
+
+  /* This makes the favorites button be at the right side of the navbar */
+  #favorites {
+    float: right;
+  }
+  
+  /* This makes the log_in button be at the right side of the navbar*/
+  #log_in {
+    float: right;
+  }
+
+  /* This styles the Calendar button */
+  .floatingButtonCalendar {
+    position: fixed; /* The element is positioned relative to the browser window and will not move even if the page is scrolled. */
+    bottom: 20px;
+    right: 0;
+    padding: 0;
+    margin: 10px;
+    margin-bottom: 40px;
+    color: white;
+    border: none;
+    cursor: pointer; /* The cursor will change to a pointer when hovering over the element. */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; /* The 'border-radius' is set to 50%, making the element circular. */
+    background-color: #aaaaaa;
+    background-image: url('/static/images/calendar-icon.png');
+    background-repeat: no-repeat; /* The background image will not repeat. */
+    background-position: center;
+    background-size: 60%;
+}
+
+/* This applies a shadow effect to the calendar button when hovered over */
+.floatingButtonCalendar:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/* This styles the Add button */
+.floatingButtonAdd {
+    position: fixed; /* The element is positioned relative to the browser window and will not move even if the page is scrolled. */
+    bottom: 40px;
+    right: 0;
+    padding: 0;
+    margin: 10px;
+    margin-bottom: 100px;
+    color: white;
+    border: none;
+    cursor: pointer; /* The cursor will change to a pointer when hovering over the element. */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; /* The 'border-radius' is set to 50%, making the element circular. */
+    background-color: #aaaaaa;
+    background-image: url("/static/images/plus-icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+/* This applies a shadow effect to the Add button when hovered over */
+.floatingButtonAdd:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/* This changes the style of the variables displaying text in the down right corner*/
+.window-size {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* This changes the style of the navbar when the user scrolls down (makes the navbar stay in the top of the screen rather than vanishing)*/
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* This makes the text and navbar not overlap */
+.sticky + .content {
+  padding-top: 60px;
+} 
+
+.sticky .dropdown-content{
+  position: fixed;
+}
+
+/* 
+This positions the profile dropdown button based on the user's scroll position, making it stick to the top of the viewport while the rest of the content scrolls past it.
+It also places the element as far to the right of its containing element as possible.
+*/
+#profile {
+  position: sticky;
+  float: right;
+}
+
+/* Calendar popup styles */
+/*---------------------------------*/
+/* Calendar modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Calendar styling */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 5px;
+  border: 1px solid #888;
+  width: 60%;
+  max-height: 60vh; /* 80% of the viewport height */
+  overflow: auto; /* Enable scroll if needed */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  margin-top: 10%; /* Add a top margin */
+  
+}
+
+/* Reduce the padding around the day numbers */
+.fc-daygrid-day {
+  padding: 1px; 
+}
+
+/* Reduce the font size of the day numbers */
+.fc-daygrid-day-number {
+  font-size: 0.8em; 
+}
+
+/* Reduce the padding around the day numbers */
+.fc-daygrid-day-frame {
+  padding: 2.5px; 
+}
+
+/* Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Styles for horizontal rule elements */
+hr {
+  float:left;
+  margin-right: 60%;
+}
+
+/* Styles for form container */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  margin: 0 20px;
+}
+
+/* Styles for form elements */
+#profileForm {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles for left column in form */
+.column-left, .column-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center vertically */
+  width: auto; /* Adjusts width based on content */
+  padding-right: 20px; 
+}
+
+.buttons-container {
+  display: flex; /* This will place the buttons side by side */
+  justify-content: center; /* Center the buttons container horizontally */
+  gap: 10px; /* Adds some space between the buttons */
+  margin-top: 20px;
+}
+
+/* Styles for action buttons (Save and Change) */
+.action-button {
+  background-color: #393d39; /* Example: Blue background */
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.action-button:hover {
+  background-color: #4caf50; /* Darker blue on hover */
+}
+
+.editable-input,
+.editable-label {
+  margin-bottom: 20px;
+}
+
+/* Styles for label elements in form */
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Styles for input elements in form */
+.photoinput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Styles for submit button in form */
+button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Styles for submit button in form when hovered over */
+button:hover {
+  background-color: #45a049;
+}
+
+/* Styles for image elements in form */
+img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  margin-top: 8px;
+  height: 30px;
+}
+
+/* Style for dropdown button */
+button {
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for button */
+button:hover {
+  background-color: #0056b3;
+}
+
+#search-container {
+  
+  float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#searchform {
+  float: left;
+  padding: 0px;
+}

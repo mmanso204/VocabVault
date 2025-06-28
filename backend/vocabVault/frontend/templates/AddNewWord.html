@@ -1,0 +1,58 @@
+{% extends "MasterTemplate.html" %}
+{% load static %}
+
+{% block cssfile %}
+<link rel="stylesheet" href="{% static 'css/AddNewWordCSS.css' %}"> 
+{% endblock %}
+
+
+{% block jsfile %}
+<script type="text/javascript" src="{% static 'js/AddNewWordJS.js' %}" defer></script>
+{% endblock %}
+
+
+{% block content %}
+<h1 id="NewWordTitle">Add new word</h1>
+
+<form method="post" action="{% url 'addword' %}" id="content_container_">
+    {% csrf_token %}
+    <p>New word</p>
+    <div id="WordNameInput">
+        <input type="text" name="word_name" placeholder="Name of the new word">
+    </div>
+
+    <!-- Part of speech section with corrected radio button structure -->
+    <p>Part of speech</p>
+    <div id="Choose" type="Choose">
+        <input type="radio" name="partOfSpeech" value="verb">
+        <label>Verb</label><br>
+        <input type="radio" name="partOfSpeech" value="noun">
+        <label>Noun</label><br>
+        <input type="radio" name="partOfSpeech" value="adjective">
+        <label>Adjective</label><br>
+        <input type="radio" name="partOfSpeech" value="adverb">
+        <label>Adverb</label><br>
+        <input type="radio" name="partOfSpeech" value="preposition">
+        <label>Preposition</label><br>
+        <input type="radio" name="partOfSpeech" value="conjunction">
+        <label>Conjunction</label><br>
+        <input type="radio" name="partOfSpeech" value="interjection">
+        <label>Interjection</label><br>
+    </div>
+
+    <!-- Pronunciation input -->
+    <p>Pronounciation</p>
+    <div type="input" id="PronunciationInput">
+        <input type="text" name="pronunciation" placeholder="Pronunciation of the new word">
+    </div>
+
+    <!-- Meaning input -->
+    <p>Meaning</p>
+    <div type="input">
+        <textarea name="meaning" id="meaning_input" placeholder="Meaning of the new word"></textarea>
+    </div>
+
+    <button type="submit" id="AddButton">Add New Word</button>
+    
+</form>
+{% endblock %}

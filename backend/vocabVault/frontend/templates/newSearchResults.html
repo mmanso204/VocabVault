@@ -1,0 +1,44 @@
+{% extends "MasterTemplate.html" %}
+{% load static %}
+
+{% block cssfile %}
+<link rel="stylesheet" href="{% static 'css/SearchResultsPageCss.css' %}"> 
+{% endblock %}
+
+
+{% block jsfile %}
+<script type="text/javascript" src="{% static 'js/SearchResultsPageJS.js' %}" defer></script>
+{% endblock %}
+
+
+{% block content %}
+
+<h1 id="NewWordTitle">Search Results</h1>
+  <ul>
+    {% for result in object_list %}
+      <li>
+        <div class="FavoritesContainer"> <!--favorite container containing link to favorite word page and text about the word-->
+            <br>
+            <a class="SearchResultTitle" href="{% url 'wordDetail' word_id=result.id %}">{{ result.word }}</a>
+            <br>
+            <br>
+            <div class="TextContainer"> 
+                {{ result.function }}
+            </div>
+            <div class="TextContainer"> 
+                {{ result.phonetic }}
+            </div>
+            <div class="TextContainer"> 
+                {{ result.meaning }}
+            </div>
+            <div class="TextContainer"> 
+                {{ result.date }}
+            </div>
+        </div>
+        
+      </li>
+    {% empty %}
+      <li>No results found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

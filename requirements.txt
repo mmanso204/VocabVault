@@ -1,0 +1,4 @@
+# use the command "pip install -r requirements.txt" to install the requirements 
+psycopg2-binary
+django
+Pillow 

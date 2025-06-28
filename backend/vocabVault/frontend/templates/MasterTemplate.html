@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Include favicon-->
+    <link rel="icon" href ="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--Include HomePage styles-->
+    {% block cssfile %}{% endblock %}
+    
+    <!--Include HomePage scripts-->
+    {% block jsfile %}{% endblock %}
+
+    <!--Include FullCalendar JS library-->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
+
+    <!--Include Jquery for the calendar-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+</head>
+<body>
+
+<!---this shows some variables that are useful for to design the website-->
+<!--<div class="window-size" id="windowSize"></div>-->
+
+<!---This object is the navigation bar in the top of the website-->
+<div class="navbar" id="navbar">
+    <!--Home button-->
+    <a href="{% url 'home' %}" id="home">Home</a>
+
+    <!---This is the Languages dropdown menu-->
+    <div class="dropdown">
+        <button class="dropbtn" href="frontend\Test document.html">Languages 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+        <a href="{% url 'select_language' 'English' %}">English</a>
+        <a href="{% url 'select_language' 'French' %}">French</a>
+        <a href="{% url 'select_language' 'German' %}">German</a>
+        </div>
+    </div> 
+    
+    <!---This is the search bar-->
+    <div type = "search" id="searchform">
+        <form id="search-form" action="{% url 'index' %}" method="get">
+            <input type="text" name="search" placeholder="Search for a word or meaning" value="{{ request.GET.title }}" id="searchbar">
+            <select name="filter" style="font-size: 10px";>
+                <option value="">Filter Options</option>
+                <option value="noun" {% if filter_by == 'noun' %}selected{% endif %}>Noun</option>
+                <option value="verb" {% if filter_by == 'verb' %}selected{% endif %}>Verb</option>
+                <option value="adjective" {% if filter_by == 'adjective' %}selected{% endif %}>Adjective</option>
+            </select>
+        </form>
+    </div>
+    
+    
+    {% if not user.is_authenticated %}
+        <!-- Links to show when the user is not logged in -->
+        <a href="{% url 'users:login' %}" id="log_in">Login</a>
+        <a href="{% url 'users:register' %}">Register</a>
+    {% else %}
+        <!-- Links to show when the user is logged in -->
+        <!---This is the Account dropdown menu-->
+        <div id="accountButton" class="dropdown">
+            <button  class="dropbtn" href="#account">Account 
+            <i  class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+            <a href="{% url 'account' %}">Account</a>
+            <a href="{% url 'quizzes' %}">Quizzes</a>
+            <a href="{% url 'users:favorites' %}" >Favorites</a>
+            <!-- Logout Button -->
+            <a href="{% url 'users:logout' %}" class="logoutButton">Logout</a> 
+            </div>
+        </div> 
+    {% endif %}
+</div>
+
+<!--Add button-->
+{% if user.is_authenticated %}
+<a href="{% url 'addword' %}"class="floatingButtonAdd"></a>
+{% endif %}
+
+<!--Calendar button that triggers calendarModal-->
+<button class="floatingButtonCalendar" id= "calendarButton"></button>
+
+<!--Calendar modal to display calendar content and the related UI elements-->
+<div id="calendarModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span> <!--Clickable 'X' element-->
+        <div id="calendar"></div> <!--Placeholder where the actual calendar will be rendered-->
+    </div>
+</div>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>
